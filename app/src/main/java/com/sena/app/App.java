@@ -1,5 +1,9 @@
 package com.sena.app;
 
+import com.sena.app.modelo.Deportes;
+import com.sena.app.service.DataService;
+import java.util.List;
+
 /**
  *
  * @author RICARDO
@@ -7,6 +11,13 @@ package com.sena.app;
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        DataService dataService = new DataService();
+        
+        List<Deportes> lista =dataService.deportesService().findDeportesEntities();
+        
+        lista.forEach(d-> System.out.println(d.getNombreDeporte()) );
+        
+        
     }
 }
