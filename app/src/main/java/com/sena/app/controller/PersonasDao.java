@@ -164,4 +164,9 @@ public class PersonasDao implements Serializable {
         }
     }
     
+   /* List<Personas> listarMayoresDeEdad(){
+        
+    }
+    */
+    
 }

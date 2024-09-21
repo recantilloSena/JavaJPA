@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.sena.app.modelo;
 
 import java.io.Serializable;
@@ -27,7 +24,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p"),
     @NamedQuery(name = "Personas.findById", query = "SELECT p FROM Personas p WHERE p.id = :id"),
     @NamedQuery(name = "Personas.findByNombre", query = "SELECT p FROM Personas p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Personas.findByEdad", query = "SELECT p FROM Personas p WHERE p.edad = :edad")})
+    @NamedQuery(name = "Personas.findByEdad", query = "SELECT p FROM Personas p WHERE p.edad = :edad"),
+})  @NamedQuery(name = "Personas.findByMayoresDeEdad", query = "SELECT p FROM Personas p WHERE p.edad > :edad")
 public class Personas implements Serializable {
 
     private static final long serialVersionUID = 1L;
