@@ -14,7 +14,7 @@ public class App {
         
         DataService dataService = new DataService();
         
-        List<Deportes> lista =dataService.deportesService().findDeportesEntities();
+        List<Deportes> lista =dataService.deportesService().findAll();
         
         lista.forEach(d-> System.out.println(d.getNombreDeporte()) );
         

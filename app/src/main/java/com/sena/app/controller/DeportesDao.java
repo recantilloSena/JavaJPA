@@ -30,7 +30,7 @@ public class DeportesDao implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Deportes deportes) throws PreexistingEntityException, Exception {
+    public void save(Deportes deportes) throws PreexistingEntityException, Exception {
         if (deportes.getPersonasList() == null) {
             deportes.setPersonasList(new ArrayList<Personas>());
         }
@@ -56,7 +56,7 @@ public class DeportesDao implements Serializable {
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findDeportes(deportes.getId()) != null) {
+            if (findById(deportes.getId()) != null) {
                 throw new PreexistingEntityException("Deportes " + deportes + " already exists.", ex);
             }
             throw ex;
@@ -111,7 +111,7 @@ public class DeportesDao implements Serializable {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = deportes.getId();
-                if (findDeportes(id) == null) {
+                if (findById(id) == null) {
                     throw new NonexistentEntityException("The deportes with id " + id + " no longer exists.");
                 }
             }
@@ -123,7 +123,7 @@ public class DeportesDao implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void delete(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -155,7 +155,7 @@ public class DeportesDao implements Serializable {
         }
     }
 
-    public List<Deportes> findDeportesEntities() {
+    public List<Deportes> findAll() {
         return findDeportesEntities(true, -1, -1);
     }
 
@@ -179,7 +179,7 @@ public class DeportesDao implements Serializable {
         }
     }
 
-    public Deportes findDeportes(Integer id) {
+    public Deportes findById(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Deportes.class, id);
@@ -188,7 +188,7 @@ public class DeportesDao implements Serializable {
         }
     }
 
-    public int getDeportesCount() {
+    public int getCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

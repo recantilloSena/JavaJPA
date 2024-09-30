@@ -31,7 +31,7 @@ public class PersonasDao implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Personas personas) {
+    public void save(Personas personas) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -80,7 +80,7 @@ public class PersonasDao implements Serializable {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = personas.getId();
-                if (findPersonas(id) == null) {
+                if (findById(id) == null) {
                     throw new NonexistentEntityException("The personas with id " + id + " no longer exists.");
                 }
             }
@@ -92,7 +92,7 @@ public class PersonasDao implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void delete(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -118,7 +118,7 @@ public class PersonasDao implements Serializable {
         }
     }
 
-    public List<Personas> findPersonasEntities() {
+    public List<Personas> findAll() {
         return findPersonasEntities(true, -1, -1);
     }
 
@@ -142,7 +142,7 @@ public class PersonasDao implements Serializable {
         }
     }
 
-    public Personas findPersonas(Integer id) {
+    public Personas findById(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Personas.class, id);
@@ -151,7 +151,7 @@ public class PersonasDao implements Serializable {
         }
     }
 
-    public int getPersonasCount() {
+    public int getCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
